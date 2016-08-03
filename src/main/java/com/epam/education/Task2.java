@@ -43,8 +43,17 @@ public class Task2 {
         Book[] books = new Book[]{lotr, hobbit, web, expected, littlePrince, harryPotter1, none};
         Author[] authors = new Author[]{tolkien, white, williams, eisenberg, murkoff, exupéry, rowling, christie, yongTolkien};
 
-        System.out.println("Some have more than 200 pages: " + maker.stream(books).filter(book -> book.getNumberOfPages() > 200).findFirst().isPresent());
-        System.out.println("All have more than 200 pages: " + !maker.stream(books).filter(book -> book.getNumberOfPages() <= 200).findFirst().isPresent());
+        boolean some = maker.stream(books)
+                .filter(book -> book.getNumberOfPages() > 200)
+                .findFirst()
+                .isPresent();
+        System.out.println("Some have more than 200 pages: " + some);
+
+        boolean all = !maker.stream(books)
+                .filter(book -> book.getNumberOfPages() <= 200)
+                .findFirst()
+                .isPresent();
+        System.out.println("All have more than 200 pages: " + all);
 
         String min = maker.stream(books)
                 .min((one, another) -> Integer.compare(one.getNumberOfPages(), another.getNumberOfPages()))

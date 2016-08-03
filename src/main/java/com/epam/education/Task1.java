@@ -68,7 +68,9 @@ public class Task1 {
         Map<Integer, List<String>> map = stream(persons).collect(
                 () -> new HashMap<Integer, List<String>>(),
                 (ageGroup, person) -> ageGroup.computeIfAbsent(person.getAge(), (age) -> new ArrayList<>()).add(person.getName()),
-                (a, b) -> Stream.of(a, b).flatMap(m -> m.entrySet().stream()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+                (a, b) -> Stream.of(a, b)
+                        .flatMap(m -> m.entrySet().stream())
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
         );
         System.out.println(map);
 
